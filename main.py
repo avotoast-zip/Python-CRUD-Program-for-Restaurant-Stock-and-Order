@@ -1,8 +1,8 @@
 # ===================================
 # [Your Program Title]
 # ===================================
-# Developed by. [Enter your name]
-# JCDS - [Class Batch]
+# Developed by. Cindy H. Tantowibowo
+# JCDS - 0512
 
 
 # /************************************/
