@@ -1,56 +1,45 @@
 # ===================================
-# [Your Program Title]
+# Restaurant Stock and Order System
 # ===================================
-# Developed by. Cindy H. Tantowibowo
-# JCDS - 0512
+# Developed by Cindy H. Tantowibowo (avotoast-zip)
 
+# / --- IMPORTS --- /
 
-# /************************************/
+import importlib
+from messages import *
 
-# /===== Data Model =====/
-# Create your data model here
-data = [] # Example data model
+# / --- MAIN PROGRAM --- /
 
-
-# /===== Feature Program =====/
-# Create your feature program here
-def read():
-    """Function for read the data
-    """
-    return
-
-def create():
-    """Function for create the data
-    """
-    return
-
-def update():
-    """Function for update the data
-    """
-    return
-
-def delete():
-    """Function for delete the data
-    """
-    return
-
-# /===== Main Program =====/
-# Create your main program here
 def main():
-    """Function for main program
-    """
 
-    input_user = input("Insert your option: ")
-    if input_user == "1":
-        read()
-    elif input_user == "2":
-        create()
-    elif input_user == "3":
-        update()
-    elif input_user == "4":
-        delete()
+    if mainMenuMsg() == True:
+
+        currentUser = None
+
+        while currentUser == None:
+
+            userID = input("\nEnter your ID: ")
+            password = input("Enter your password: ")
+
+            module = importlib.import_module("user")
+            currentUser = module.getCurrentUser(userID, password)
+
+        currentUser = str(currentUser).upper()
+        userRole = module.getUser(currentUser, "Role")
+
+        if userRole == "Master Admin":
+            module = importlib.import_module("master_admin")
+            module.masterAdminMenu(currentUser)
+        elif userRole == "Stock Manager":
+            module = importlib.import_module("stock_manager")
+            module.stockManagerMenu(currentUser)
+        elif userRole == "Kitchen Staff":
+            module = importlib.import_module("kitchen_staff")
+            module.kitchenStaffMenu(currentUser)
+    
     else:
-        print("Input is not valid !")
+        exitMsg()
+
 
 
 if __name__ == "__main__":
