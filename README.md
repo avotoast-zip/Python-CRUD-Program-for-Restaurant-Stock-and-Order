@@ -1,80 +1,55 @@
-# Python CRUD Application for [Business Domain]
+# Python CRUD Application for Restaurant Stock and Order System
 
-A comprehensive Python application for managing [Data Entity] data with Create, Read, Update, and Delete (CRUD) operations.
+A comprehensive Python application for managing a simple restaurant stock and order data with Create, Read, Update, and Delete (CRUD) operations. The hypothetical restaurant is called "Uncle Tjong's Chinese Restaurant" and has an initial list of users, stock items, and menu. The predefined user roles have unique built-in abilities to modify this initial data.
 
 ## Business Understanding
 
-This project caters to the [Industry/Business Domain] industry, specifically addressing the need to manage [Data Entity] data efficiently. [Data Entity] plays a crucial role in [Explain the importance of data entity in business processes].
+This project caters to the food and beverage industry, specifically addressing the need to manage stock and kitchen data efficiently. This data plays a crucial role in keeping track of kitchen inventory and daily orders.
 
 **Benefits:**
 
 * Improved data accuracy and consistency
 * Streamlined data management processes
 * Enhanced decision-making through readily available data
-* ... (List additional benefits relevant to the business)
+* Improve coordination between different kitchen and inventory roles in a simple restaurant environment.
 
 **Target Users:**
 
-This application is designed for [Target Users] (e.g., sales representatives, inventory managers, customer support agents) within the organization to facilitate their [Tasks/Activities] related to [Data Entity].
+This application caters to three main user types:
+
+**Master Admin:** Master Admin has an exclusive privilege to access and manage the app users.
+**Stock Manager:** Stock Manager has an exclusive privilege to access and manage stock/inventory data.
+**Kitchen Staff:** Kitchen Staff has an exclusive privilage to access menu and order data.
 
 ## Features
 
 * **Create:**
-    * Add new [Data Entity] entries with essential details like [List relevant fields].
-    * Implement validation rules to ensure data integrity (if applicable, e.g., unique identifiers, data type checks).
+    * Master Admin can create new users and define their user ID, role, name, and initial password, with user ID as the unique identifier.
+    * Stock Manager can create new stock items and define their initial quantity, with item name as the unique identifier.
+    * Kitchen Staff can create new orders and define their quantity, with an automated system checking on stock availability for the ingredients of each order item.
 * **Read:**
-    * Search and retrieve specific [Data Entity] records by applying filters based on [Searchable fields].
-    * Display comprehensive information for each [Data Entity] in a user-friendly format.
-    * Integrate pagination and sorting capabilities for large datasets (if applicable).
+    * Master Admin can retrieve all or any user data, but unable to access their password through this feature for privacy reasons.
+    * Stock Manager can retrieve all stock data and see when each item was last updated.
+    * Kitchen Staff can access the restaurant's menu and view order history.
 * **Update:**
-    * Modify existing [Data Entity] data to reflect changes in [Attributes/Properties].
-    * Provide clear confirmation or error messages based on update success or failure.
+    * Master Admin can update user data (except for their ID and password), but they cannot change their own role.
+    * Stock Manager can update stock data by adding or subtracting from the number of stock quantity. This includes checking on the stock availability for such actions to be performed.
+    * Kitchen Staff has an indirect ability to update stock quantity data by placing orders. This action, upon checking for stock availability, will automatically reduce stock based on the order quantity and ingredient list.
+    * All users can update their own password by first verifying their old one for authentication purposes.
 * **Delete:**
-    * Allow for the removal of unwanted [Data Entity] records with appropriate authorization checks (if applicable).
-    * Implement soft delete functionality to prevent permanent data loss (optional, depending on business needs).
-    * Consider offering data archiving capabilities (optional).
+    * Master Admin can delete any or all user data except for their own.
 * **Security:**
-    * Implement user authentication and authorization mechanisms (if sensitive data is involved) to control access to different CRUD operations.
-    * ... (Specify additional security features as needed)
-* **Reporting:**
-    * Generate reports or summaries based on [Data Entity] data to support [Business Functions] (optional).
-    * Export data in various formats (e.g., CSV, Excel) for further analysis (optional).
+    * The security features of this app includes user authentication, password privacy protection, and data validation.
 
 ## Installation
 
 1. **Prerequisites:**
-    * Python version (specify the required version)
-    * Additional dependencies (list any required packages)
-
-2. **Installation:**
-    ```bash
-    git clone https://github.com/<your-username>/<your-repo-name>.git
-    cd <your-repo-name>
-    pip install -r requirements.txt  # If using a requirements.txt file
-    ```
-
-3. **Database Setup (if applicable):**
-    Follow specific instructions for configuring your database connection, aligning with the business's chosen database management system.
-
-## Usage
-
-1. **Run the application:**
-    ```bash
-    python main.py
-    ```
-
-2. **CRUD Operations:**
-    * **Create:** Add a new [Data Entity] record, for example, a new customer in a customer management system, providing details like name, contact information, and preferences.
-    * **Read:** Search and retrieve customer information by name, ID, or other relevant criteria.
-    * **Update:** Modify customer details, such as updating their address or contact details.
-    * **Delete:** Remove a customer record from the system (with appropriate authorization, if applicable).
+    * This app was built on Python version 3.9.11
+    * There are no additional dependencies.
 
 ## Data Model
-This project utilizes a [Data Structure] (e.g., relational database, JSON documents) to represent [Data Entity] data. The following fields are typically stored:
-   * [Field 1]: (Data type) - Description of the field's purpose in the business context.
-   * [Field 2]: (Data type) - Description of the field's purpose in the business context.
-   * ... (List all relevant fields)
+This project utilizes a Dictionary data structure, with a minor use of List for order history data.
 
 ## Contributing
-We welcome contributions to this project! Please feel free to open a pull request, sent to [your_email] or submit an issue if you encounter any problems or have suggestions for improvements.
+We welcome contributions to this project! Please feel free to open a pull request, sent to cindyhtantowibowo@gmail.com or submit an issue if you encounter any problems or have suggestions for improvements.
 
