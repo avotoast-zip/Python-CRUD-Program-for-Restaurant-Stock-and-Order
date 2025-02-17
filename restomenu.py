@@ -64,21 +64,21 @@ def viewMenu():
     
 # 3. Place Order Function
 
-def placeOrder(orderID=str, menuName=str, qty=int):
+def placeOrder(menuName=str, qty=int):
     menuName = menuName.lower().title()
     if menuName in restoMenu:
         if str(qty).isdigit() and int(qty) > 0:
             ingredients = getIngredients(menuName)
-
+            
             for i in ingredients:
-                if verifyStock(i, int(ingredients[i])*qty) == True:
+                if verifyStock(i, int(ingredients[i])*int(qty)) == True:
                     continue
                 else:
                     stockNotEnoughMsg()
                     break
             else:
                 orders.append({
-                    "Order ID" : orderID,
+                    "Order ID" : len(orders)+1,
                     "Menu Item" : menuName,
                     "Quantity" : qty,
                     "Order Time" : datetime.today().strftime("%Y-%m-%d %H:%M:%S")
@@ -113,6 +113,8 @@ def verifyStock(ingredient=str, neededQty=int):
     if str(neededQty).isdigit() and int(neededQty) > 0:
         if checkStock(ingredient) == True:
             currQty = getCurrentStock(ingredient)
+            # print(f"Current stock = {getCurrentStock(ingredient)}")
+            # print(f"Needed quantity = {int(neededQty)}")
             if int(currQty) >= int(neededQty):
                 return True
             else:

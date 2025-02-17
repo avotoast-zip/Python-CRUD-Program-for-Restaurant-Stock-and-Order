@@ -12,16 +12,15 @@ from messages import *
 def kitchenStaffMenu(currentUserID):
     userMenuMsg("Kitchen Staff")
     selectActionMsg()
-    option1 = printOption("1. View Menu")
-    option2 = printOption("2. Place Order")
-    option3 = printOption("3. View Order History")
-    option4 = printOption("4. Change password")
-    print("5. Logout")
-    print("6. Exit program")
+    option1 = printOption("1. View Menu and Place Order")
+    option3 = printOption("2. View Order History")
+    option4 = printOption("3. Change password")
+    print("4. Logout")
+    print("5. Exit program")
 
     # Looping until user enters a correct number
     selection = None
-    while selection not in ["1","2","3","4","5","6"]:
+    while selection not in ["1","2","3","4","5"]:
         selection = enterSelectionMsg()
 
         # # # View menu selection
@@ -30,34 +29,23 @@ def kitchenStaffMenu(currentUserID):
             print(option1)
             viewMenu()
 
-            # Asks if user wants to perform another action
-            moreActionConfirm(currentUserID)
-
-        # # # Add new / update item selection
-
-        elif selection == "2":
-            print(option2)
-
+            # Allow user to add items to order
             while True:
-                orderID = input("Enter order ID: ")
-                while True:
-                    if userConfirmation("AddOrder") == True:
-                        menuAdd = input("Enter menu name: ")
-                        qtyAdd = input("Enter quantity: ")
-                        action = placeOrder(orderID, menuAdd, qtyAdd) == True
-                        continue
-                    else:
-                        break
-                if userConfirmation("Add") == True:
+                if userConfirmation("AddToOrder") == True:
+                    menuAdd = input("Enter menu name: ")
+                    qtyAdd = input("Enter quantity: ")
+                    action = placeOrder(menuAdd, qtyAdd)
                     continue
-                break
-        
+                else:
+                    break
+
             # Asks if user wants to perform another action
             moreActionConfirm(currentUserID)
-                
+
 
         # # # View order history selection
-        elif selection == "3":
+        elif selection == "2":
+            print(option3)
             if orders != []:
                 print(json.dumps(orders, indent = 3))
             else:
@@ -67,7 +55,7 @@ def kitchenStaffMenu(currentUserID):
             moreActionConfirm(currentUserID)
 
         # # # Change password selection
-        elif selection == "4":
+        elif selection == "3":
             print(option4)
             changePassword(currentUserID)
 
@@ -78,7 +66,7 @@ def kitchenStaffMenu(currentUserID):
 
         # # # Logout selection
         
-        elif selection == "5":
+        elif selection == "4":
             selectLogout = logout()
             if selectLogout == False:
                 moreActionConfirm(currentUserID)
@@ -87,7 +75,7 @@ def kitchenStaffMenu(currentUserID):
 
         # # # Exit program selection
 
-        elif selection == "6":
+        elif selection == "5":
             if userConfirmation("Exit") == True:
                 exitMsg()
             moreActionConfirm(currentUserID)
@@ -96,7 +84,7 @@ def kitchenStaffMenu(currentUserID):
 
         # # # Invalid input
 
-        if selection not in ["1","2","3","4","5","6"]:
+        if selection not in ["1","2","3","4","5"]:
             invalidInputMsg()
 
 

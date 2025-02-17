@@ -87,14 +87,15 @@ def masterAdminMenu(currentUserID):
                 print(suboption1)
 
                 while True:
-
-                    while True:
-                        # User ID input
-                        newUserID = input("Enter new user ID: ")
-                        if checkUser(newUserID) == False:
-                            break
+                    
+                    # User ID input
+                    newUserID = input("Enter new user ID: ")
+                    if checkUser(newUserID) == True:
                         userExistsMsg()
                         print("")
+                        if userConfirmation("Add") == True:
+                            continue
+                        break
 
                     # User role input
                     newUserRole = selectRole()
@@ -118,33 +119,32 @@ def masterAdminMenu(currentUserID):
             elif subselect == "2":
                 print(suboption2)
                 
-                while True:
-                    # User ID input
-                    updateUserID = input("Enter user ID: ")
+                # User ID input
+                updateUserID = input("Enter user ID: ")
 
-                    # Display user info
-                    print("")
-                    getUser(updateUserID)
+                # Display user info
+                print("")
+                getUser(updateUserID)
 
-                    if updateUserID.upper() in appUser:
+                if updateUserID.upper() in appUser:
 
-                        # Get update key
-                        updateKey = input("What information(s) do you want to update? (Separated by comma)")
-                        updateKey = updateKey.replace(" ","").split(",")
+                    # Get update key
+                    updateKey = input("What information(s) do you want to update? (Separated by comma)")
+                    updateKey = updateKey.replace(" ","").split(",")
 
-                        for i in range(len(updateKey)):
-                            if updateKey[i] != "Role":
-                                updateValue = input(f"\nEnter new value for {updateKey[i]}: ")
-                            else:
-                                updateValue = selectRole()
-                            updateUser(currentUserID, updateUserID, updateKey[i], updateValue)
+                    for i in range(len(updateKey)):
+                        if updateKey[i] != "Role":
+                            updateValue = input(f"\nEnter new value for {updateKey[i]}: ")
                         else:
-                            if userConfirmation("Update") == True:
-                                continue
-                        break
-
-                # Ask if user wants to perform another action
-                moreActionConfirm(currentUserID)
+                            updateValue = selectRole()
+                        updateUser(currentUserID, updateUserID, updateKey[i], updateValue)
+                    else:
+                        if userConfirmation("Update") == True:
+                            continue
+                    break
+                else:
+                    # Ask if user wants to perform another action
+                    moreActionConfirm(currentUserID)
 
             # Back to main menu subselection
             elif subselect == "3":
@@ -169,10 +169,9 @@ def masterAdminMenu(currentUserID):
 
             if subselect == "1":
                 print(suboption1)
-                status = False
-                while status == False:
-                    delete = input("\nEnter the user ID to deleted: ")
-                    status = deleteUser(currentUserID, delete)
+
+                delete = input("\nEnter the user ID to deleted: ")
+                status = deleteUser(currentUserID, delete)
 
                 # Ask if user wants to perform another action
                 moreActionConfirm(currentUserID)

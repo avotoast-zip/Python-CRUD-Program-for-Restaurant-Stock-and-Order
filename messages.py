@@ -33,7 +33,7 @@ def performMoreAction():
         return False
 
 # User confirmation to perform an action
-def userConfirmation(actionType = "Regular"):
+def userConfirmation(actionType = "Regular", subAction = ""):
 
     userConfirm = None
 
@@ -47,10 +47,12 @@ def userConfirmation(actionType = "Regular"):
             message = "\nAre you sure you want to logout? [Y/N] "
         elif actionType == "Exit":
             message = "\nAre you sure you want to exit the program? [Y/N] "
-        elif actionType == "Add":
+        elif actionType == "Add" and subAction == "":
             message = "\nDo you want to add another? [Y/N] "
-        elif actionType == "AddOrder":
-            message = "\nDo you want to add item to the order? [Y/N] "
+        elif actionType == "Add" and subAction == "Order":
+            message = "\nDo you want to add another order? [Y/N] "
+        elif actionType == "AddToOrder":
+            message = "\nDo you want to add order? [Y/N] "
         elif actionType == "Update":
             message = "\nDo you want to update another? [Y/N] "
         elif actionType == "Delete":
